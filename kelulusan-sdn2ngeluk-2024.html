@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Pengumuman Kelulusan SDN 2 NGELUK 2024/2025</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f0f8ff;
+      text-align: center;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+    }
+    .hasil {
+      margin-top: 20px;
+      font-size: 18px;
+      background-color: #e6ffe6;
+      padding: 20px;
+      display: inline-block;
+      border-radius: 10px;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h2>Pengumuman Kelulusan</h2>
+  <p><strong>SD NEGERI 2 NGELUK</strong> <br>Tahun Ajaran 2024/2025</p>
+  <p>Silakan masukkan NISN dan Tanggal Lahir Anda</p>
+
+  <input type="text" id="nisn" placeholder="Masukkan NISN">
+  <input type="text" id="dob" placeholder="Tanggal Lahir (dd/mm/yyyy)">
+  <button onclick="cekKelulusan()">Cek Kelulusan</button>
+
+  <div id="result" class="hasil" style="display:none;"></div>
+  <div id="error" class="error"></div>
+
+  <script>
+    const siswa = [
+      { nama: "ALICA PUTRI NOVELIA", nisn: "3123896644", dob: "11/1/2012", status: "LULUS" },
+      { nama: "ANDAH MANGKULAT", nisn: "126037356", dob: "18/10/2012", status: "LULUS" },
+      { nama: "ASYIFA MEKAR AZZAHRA", nisn: "132361663", dob: "5/6/2013", status: "LULUS" },
+      { nama: "DESI ERNAWATI", nisn: "3113153926", dob: "30/12/2011", status: "LULUS" },
+      { nama: "DEVI NIDYA NURROHMAN", nisn: "128636856", dob: "14/12/2012", status: "LULUS" },
+      { nama: "HERNANDO OKTO .P", nisn: "113210114", dob: "10/10/2011", status: "LULUS" },
+      { nama: "MIRZA PRATAMA", nisn: "3121627003", dob: "13/11/2012", status: "LULUS" },
+      { nama: "NASYIKA ARINDA .M", nisn: "138676083", dob: "1/1/2013", status: "LULUS" },
+      { nama: "PUTRI YASMIN NAZRILLA", nisn: "3136646693", dob: "12/5/2013", status: "LULUS" },
+      { nama: "SOFIA RHESA ANUM", nisn: "126566555", dob: "7/10/2012", status: "LULUS" },
+      { nama: "TEGAR APRILLIANO", nisn: "3135099778", dob: "3/4/2013", status: "LULUS" },
+      { nama: "ZUBDATUL ARDELIA .R", nisn: "131247156", dob: "18/1/2013", status: "LULUS" },
+      { nama: "SEKAR ARUM ANISATUS .S", nisn: "1350047333", dob: "26/2/2012", status: "LULUS" },
+      { nama: "ARETHA ZIZI SANDERICA.I", nisn: "3133840351", dob: "26/1/2013", status: "LULUS" }
+    ];
+
+    function formatTanggal(tgl) {
+      return tgl.trim().replace(/^0+/, '');
+    }
+
+    function cekKelulusan() {
+      const nisn = document.getElementById("nisn").value.trim();
+      const dob = formatTanggal(document.getElementById("dob").value.trim());
+      const resultDiv = document.getElementById("result");
+      const errorDiv = document.getElementById("error");
+      resultDiv.style.display = "none";
+      errorDiv.textContent = "";
+
+      const data = siswa.find(s => s.nisn === nisn && formatTanggal(s.dob) === dob);
+
+      if (data) {
+        resultDiv.innerHTML = `
+          <strong>Nama:</strong> ${data.nama} <br>
+          <strong>NISN:</strong> ${data.nisn} <br>
+          <strong>Tanggal Lahir:</strong> ${data.dob} <br>
+          <strong>Status:</strong> ${data.status} <br><br>
+          <em>Selamat! Anda dinyatakan <strong>LULUS</strong>. Semoga sukses di jenjang berikutnya!</em>
+        `;
+        resultDiv.style.display = "block";
+      } else {
+        errorDiv.textContent = "Data tidak ditemukan. Pastikan NISN dan Tanggal Lahir sudah benar.";
+      }
+    }
+  </script>
+</body>
+</html>
